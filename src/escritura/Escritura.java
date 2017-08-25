@@ -52,7 +52,7 @@ public class Escritura extends JFrame{
         
         add(label1);
         add(panel);
-        
+        //hbhbj
         this.setVisible(true);
     }
 }
