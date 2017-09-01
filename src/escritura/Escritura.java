@@ -3,17 +3,22 @@ package escritura;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 
 public class Escritura extends JFrame{
@@ -49,10 +54,40 @@ public class Escritura extends JFrame{
         this.setSize(1366,760);
         label1.add(texto);
         label1.add(boton);
-        
+        boton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String x = texto.getText();;
+                String[] palabra =x.split("");
+                
+                if ("".equals(palabra[0])) 
+                {
+                        
+                    JOptionPane.showMessageDialog(null,"NO HA INGRESADO NINGUNA PALABRA");
+                } 
+                else {
+
+                    int i=0;
+                    String aux;
+                    while(i<palabra.length){
+                        aux = palabra[i];
+                        panel.getPalabra().add(aux);
+                        i++;
+                    }
+                    actualizarpantalla();
+                }
+            }
+        });
         add(label1);
         add(panel);
-        //hbhbj
+        
+ 
         this.setVisible(true);
+    }
+    public void actualizarpantalla(){ 
+        Container temp = this.getContentPane();
+        SwingUtilities.updateComponentTreeUI(temp);
+        temp.validate();
+        requestFocusInWindow();
     }
 }
